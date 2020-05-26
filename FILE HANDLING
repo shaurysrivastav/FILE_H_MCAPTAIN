@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+FILE *fp,*fp1;
+char a[100],ch,cha;
+fp=fopen("new.txt","w");
+scanf("%s",a);
+fprintf(fp,"%s",a);
+fclose(fp);
+fp=fopen("new.txt","r");
+fp1=fopen("new1.txt","w");
+cha=getc(fp);
+//copying data from one file to another//
+while(cha!=EOF)
+{
+fputc(cha,fp1);
+cha=getc(fp);
+}
+ch=getc(fp1);
+fclose(fp);
+fclose(fp1);
+//reversing the data in file//
+fp=fopen("new.txt","r");
+fseek(fp,0,SEEK_END);
+      int pos=ftell(fp);
+      int i=0;
+      while(i<pos)
+       {
+            i++;
+            fseek(fp,-i,SEEK_END);
+            ch=fgetc(fp);
+            printf("%c",ch);
+      }
+fclose(fp);
+return 0;
+}
